@@ -4,7 +4,7 @@ import {ListItem,Avatar} from 'react-native-elements';
 import {CONTACTS} from "../../../dummy-data";
 import * as Contacts from 'expo-contacts';
 
-export const ContactList = ({navigation}) => {
+export const ContactList = ({route, navigation}) => {
     
 
     const onPress = (contactData) => {
@@ -13,7 +13,6 @@ export const ContactList = ({navigation}) => {
 
     const favoriteContact = CONTACTS.find((contact) => contact.favorite);
     const [contactsData,setContactsData] = useState([]);
-    const [favorites, setFavorites] = useState([]);
     
 
      useEffect(() => {
@@ -32,35 +31,23 @@ export const ContactList = ({navigation}) => {
      },[]);
     
     
-     useEffect(() => {
-        const fetchFavorites = async () => {
-        const { data } = await Contacts.getFavoritesAsync();
-            setFavorites(data);
-            console.log(data)
-        };
-        fetchFavorites();
-     },[]);
-    
-    
-    console.log("Favorites: ", favorites)
-    console.log("Contact Data: ", contactsData)
   return (
     <ScrollView>
-      {favoriteContact && (
+      {route.params && (
         <ListItem
-          key={favoriteContact.id}
+          key={route.params.name}
           bottomDivider
-          onPress={() => onPress(favoriteContact)}
+          onPress={() => onPress(route.params)}
           containerStyle={styles.favorite}
         >
           <Avatar
             rounded
-            title={favoriteContact.name[0]}
+            title={route.params.name[0]}
             backgroundColor="#bcbec1"
           />
           <ListItem.Content>
-            <ListItem.Title>{favoriteContact.name}</ListItem.Title>
-            <ListItem.Subtitle>{favoriteContact.phone}</ListItem.Subtitle>
+            <ListItem.Title>{route.params.name}</ListItem.Title>
+            <ListItem.Subtitle>{route.params.phoneNumbers[0].digits}</ListItem.Subtitle>
           </ListItem.Content>
         </ListItem>
       )}

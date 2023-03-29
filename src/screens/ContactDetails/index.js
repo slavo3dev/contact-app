@@ -16,6 +16,12 @@ export const ContactDetails = ({route,navigation}) => {
         setIsFavorite(true);
     };
 
+
+     const onPress = (contactData) => {
+        navigation.navigate("ContactList", contactData)
+    }
+
+
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -44,7 +50,13 @@ export const ContactDetails = ({route,navigation}) => {
       </View>
       <Button
         title="Back to contacts"
-        onPress={() => navigation.goBack()}
+              onPress={() => onPress(isFavorite && {
+                  name,
+                  company,
+                  phoneNumbers,
+                  emails,
+                  isFavorite
+              })}
         style={{ marginTop: 20 }}
       />
     </View>
