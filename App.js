@@ -2,7 +2,6 @@ import {StyleSheet } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {ContactList, ContactDetails} from "./src/screens";
-import {CONTACTS} from "./dummy-data";
 
 
 const Stack = createStackNavigator();
@@ -14,16 +13,13 @@ export default function App() {
         <Stack.Screen
           name="ContactList"
           options={{ title: 'Contacts' }}
-          component={(props) => (
-            <ContactList {...props} contacts={CONTACTS} />
-          )}
+          component={ContactList}
         />
         <Stack.Screen
-          name="ContactDetails"
-          options={({ route }) => ({ title: route.params.contact.name })}
-          component={(props) => (
-            <ContactDetails {...props} contact={props.route.params.contact} />
-          )}
+           name="ContactDetails"
+           options={{ title: 'Contacts Details' }}
+        //   options={({ route }) => ({ title: route.params.contact.name })}
+          component={ContactDetails}
         />
       </Stack.Navigator>
     </NavigationContainer>
