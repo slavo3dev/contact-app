@@ -11,7 +11,8 @@ export const ContactList = ({route, navigation}) => {
         navigation.navigate("ContactDetails", contactData)
     }
 
-    const favoriteContact = CONTACTS.find((contact) => contact.favorite);
+    // TO DO if there is favorites in the list
+    // const favoriteContact = CONTACTS.find((contact) => contact.favorite);
     const [contactsData,setContactsData] = useState([]);
     
 
